@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Fundamentals</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        #vue-3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #input-container {
+            display: flex;
+            background-color: #dddddd;
+            padding: 5px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        #input-container label {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="vue-3">
+    <div id="input-container">
+        <label for="answer-box">{{firstNumber}} {{sign}} {{secondNumber}}</label>
+        <input v-model="userAnswer" type="text" id="answer-box" name="answer-box" value=""/>
+    </div>
+</div>
+
+<script>
+    // js determines what goes into label
+    // for division it appears zetamac always has the left number bigger than the right one
+    const {createApp, ref, watch, onMounted} = Vue
+    createApp({
+        setup() {
+            let firstNumber = ref(0)
+            let secondNumber = ref(0)
+            let signs = ["+", "-", "*", "/"]
+            let sign = ref("")
+            let correctAnswer = 0
+            let userAnswer = ref()
+
+            // firstNumber.value = (Math.floor(Math.random() * 10))
+            // secondNumber.value = (Math.floor(Math.random() * 10))
+            // sign.value = signs[Math.floor(Math.random() * 4)]
+
+            function generateNewProblem() {
+                firstNumber.value = Math.floor(Math.random() * 10)
+                secondNumber.value = Math.floor(Math.random() * 10)
+                sign.value = signs[Math.floor(Math.random() * 4)]
+                userAnswer.value = ""
+                generateCorrectAnswer()
+            }
+
+            function generateCorrectAnswer() {
+                if (sign.value === "+") {
+                    correctAnswer = firstNumber.value + secondNumber.value
+                } else if (sign.value === "*") {
+                    correctAnswer = firstNumber.value * secondNumber.value
+                } else if (sign.value === "/") {
+                    correctAnswer = Math.floor(firstNumber.value / secondNumber.value)
+                } else if (sign.value === "-") {
+                    correctAnswer = firstNumber.value - secondNumber.value
+                }
+            }
+
+            // console.log("correct answer", correctAnswer)
+            watch(userAnswer, (v) => {
+                // console.log(Number(v))
+                if (Number(v) === correctAnswer) {
+                    // console.log("here")
+                    generateNewProblem()
+                }
+            })
+
+            generateNewProblem()
+            return {firstNumber, secondNumber, sign, userAnswer}
+        }
+    }).mount("#vue-3")
+</script>
+
+</body>
+</html>

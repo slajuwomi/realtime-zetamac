@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Fundamentals</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="vue-3">
+    <h1>{{getMessage()}}</h1>
+    <p>Lucky Numbers: {{luckyNumber}}</p>
+    <p>Lucky number is an {{luckyNumber % 2 == 0 ? "even number" : "odd number"}}</p>
+    <p>Random number from 1 to 10: {{getRandomLuckyNumber()}}</p>
+    <p>{{employees.name}} is {{employees.age}} years old.</p>
+    <p>His salary is {{employees.salary}}</p>
+</div>
+<script>
+    const {createApp, ref, reactive} = Vue
+    createApp({
+        setup() {
+            const message = "Learning Vue!"
+            let luckyNumber = ref(7)
+            const luckyNumbers = [3, 5, 7, 12]
+            const employees = reactive({
+                name: "John",
+                age: 55,
+                role: "Manager",
+                salary: 50000
+            });
+
+            function getRandomLuckyNumber() {
+                setTimeout(() => {
+                    luckyNumber.value = 77
+                    employees.salary = 60000
+                }, 2000);
+            }
+
+            function getMessage() {
+                return message.toUpperCase();
+            }
+
+            return {
+                luckyNumbers, employees, luckyNumber, getRandomLuckyNumber, getMessage
+            }
+        }
+    }).mount("#vue-3")
+</script>
+</body>
+</html>

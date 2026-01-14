@@ -1,0 +1,1 @@
+so just noticed that SpringBoot is mainly a backend framework. 
