@@ -7,6 +7,15 @@
 </head>
 <body>
 <div id="vue-3">
+    <div v-bind:style="{backgroundColor: 'aqua', fontSize: fontSizeTemp+ 'px'}">
+        Hello World
+    </div>
+    <div :style="{'background-color': 'aqua', 'font-size': '40px'}">
+        Hello World
+    </div>
+    <span class="padding-medium" v-bind:class="[isMainTitle()? mainTitle: '', borderClass]">Random Text</span>
+    <br>
+    <span class="padding-medium" v-bind:style="mainTitle">More Random Text</span>
     <h1>{{message}}</h1>
     <p v-for="(luckyNumber, index) in luckyNumbers"> {{index}} Lucky Number: {{luckyNumber}}</p>
     <p>{{employee.name}} is {{employee.age}} years old.</p>
@@ -32,6 +41,7 @@
         setup() {
             const message = "Learning Vue!"
             const luckyNumbers = [3, 5, 7, 12, 17]
+            const fontSizeTemp = 60;
             const employee = reactive({
                 name: "John",
                 age: 55,
@@ -53,11 +63,58 @@
                 }, 5000)
             }
 
+            function isMainTitle() {
+                return true;
+            }
+
+            function hasGreenBackground() {
+                return true;
+            }
+
+            const mainTitle = {
+                h1: true,
+                "bg-grey": true,
+            }
+
+            const borderClass = {
+                border: true
+            }
+
             return {
-                message, luckyNumbers, employee, shuffleEmployeeProjects
+                message,
+                luckyNumbers,
+                employee,
+                shuffleEmployeeProjects,
+                fontSizeTemp,
+                isMainTitle,
+                hasGreenBackground,
+                borderClass,
+                mainTitle
             }
         }
     }).mount("#vue-3")
 </script>
+<style>
+    .h1 {
+        font-size: 50px;
+        color: lightgreen;
+    }
+
+    .bg-grey {
+        background-color: grey;
+    }
+
+    .bg-green {
+        background-color: green;
+    }
+
+    .padding-medium {
+        padding: 5px;
+    }
+
+    .border {
+        border: 2px solid red;
+    }
+</style>
 </body>
 </html>
