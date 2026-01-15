@@ -13,6 +13,9 @@
     <div :style="{'background-color': 'aqua', 'font-size': '40px'}">
         Hello World
     </div>
+    <button v-on:click="onButtonClick">Click Me</button>
+    <br>
+    <br>
     <span class="padding-medium" v-bind:class="[isMainTitle()? mainTitle: '', borderClass]">Random Text</span>
     <br>
     <span class="padding-medium" v-bind:style="mainTitle">More Random Text</span>
@@ -80,6 +83,10 @@
                 border: true
             }
 
+            function onButtonClick() {
+                alert("Button Clicked!");
+            }
+
             return {
                 message,
                 luckyNumbers,
@@ -89,7 +96,8 @@
                 isMainTitle,
                 hasGreenBackground,
                 borderClass,
-                mainTitle
+                mainTitle, 
+                onButtonClick
             }
         }
     }).mount("#vue-3")
