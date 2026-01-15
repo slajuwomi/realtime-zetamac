@@ -13,7 +13,11 @@
     <div :style="{'background-color': 'aqua', 'font-size': '40px'}">
         Hello World
     </div>
-    <button v-on:click="onButtonClick">Click Me</button>
+    <button v-on:click="onButtonClick('Vue is great!', 'Hello World!', $event)">Click Me</button>
+    <p>
+        x: {{x}} 
+        y: {{y}}
+    </p>
     <br>
     <br>
     <span class="padding-medium" v-bind:class="[isMainTitle()? mainTitle: '', borderClass]">Random Text</span>
@@ -83,8 +87,12 @@
                 border: true
             }
 
-            function onButtonClick() {
-                alert("Button Clicked!");
+            let x = ref(0)
+            let y = ref(0)
+
+            function onButtonClick(newMessage, newMessage2, event) {
+                x.value = event.x
+                y.value = event.y
             }
 
             return {
@@ -97,7 +105,9 @@
                 hasGreenBackground,
                 borderClass,
                 mainTitle, 
-                onButtonClick
+                onButtonClick,
+                x,
+                y,
             }
         }
     }).mount("#vue-3")
