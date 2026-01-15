@@ -13,8 +13,16 @@
     <p>His salary is {{employee.salary}}</p>
     <h4>Projects:</h4>
     <ul>
-        <li v-for="(project,index) in employee.projects">
+        <li v-for="(project,index) in employee.projects" :key="project.project">
             <span>{{index}} - "{{project.project}}" in {{project.timeline}}</span>
+            <input type="text">
+        </li>
+    </ul>
+    {{shuffleEmployeeProjects()}}
+    <hr/>
+    <ul>
+        <li v-for="(value,key) in employee">
+            <span>{{value}}: {{key}}</span>
         </li>
     </ul>
 </div>
@@ -35,11 +43,18 @@
                 projects: [
                     {project: "Green A", timeline: "3 years"},
                     {project: "Red B", timeline: "2 years"},
+                    {project: "Orange C", timeline: "2 years"},
                 ]
             });
 
+            function shuffleEmployeeProjects() {
+                setTimeout(() => {
+                    employee.projects.sort(() => Math.random() - 0.5)
+                }, 5000)
+            }
+
             return {
-                message, luckyNumbers, employee
+                message, luckyNumbers, employee, shuffleEmployeeProjects
             }
         }
     }).mount("#vue-3")
