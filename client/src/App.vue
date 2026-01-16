@@ -26,13 +26,17 @@ const fetchDepartments = async () => {
   }
 }
 
-const handleSumbit = () => {
-
+const handleSubmit = async () => {
+  try {
+    const response = await axios.post('http://localhost:8082/departments', formData.value)
+    console.log("Post Successful:", response)
+  } catch (error) {
+    console.error("Post Failed:", error.message)
+  }
 }
 
 onMounted(() => {
   fetchDepartments()
-  console.log(departmentList)
 })
 
 function generateNewProblem() {
@@ -72,10 +76,26 @@ generateNewProblem()
     </div>
   </div>
   <form @submit.prevent="handleSubmit">
-    <label>Department Name:</label><input v-model="formData.departmentName">
-    <label>Department Address:</label><input v-model="formData.departmentAddress">
-    <label>Department Code:</label><input v-model="formData.departmentCode">
+    <label>Department Name:</label><input v-model="formData.departmentName"><br>
+    <label>Department Address:</label><input v-model="formData.departmentAddress"><br>
+    <label>Department Code:</label><input v-model="formData.departmentCode"><br>
+    <button type="submit">Submit</button>
   </form>
+  <button @click="fetchDepartments">Fetch Departments</button>
+  <br>
+  <ul>
+    <li v-for="dep in departmentList">
+      Department ID: {{ dep.departmentId }}
+      <br/>
+      Department Name: {{ dep.departmentName }}
+      <br/>
+      Department Address: {{ dep.departmentAddress }}
+      <br/>
+      Department Code: {{ dep.departmentCode }}
+      <br>
+      <br>
+    </li>
+  </ul>
   {{ departmentList }}
 </template>
 
@@ -114,5 +134,9 @@ body {
 input {
   width: 180px;
   font-size: 48px;
+}
+
+button {
+  font-size: 24px;
 }
 </style>
