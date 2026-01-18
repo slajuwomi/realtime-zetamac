@@ -1,6 +1,6 @@
 <script setup>
 import {ref, watch, onMounted} from 'vue'
-import axios from 'axios'
+import apiClient from '@/services/api'
 
 let firstNumber = ref(0)
 let secondNumber = ref(0)
@@ -19,7 +19,7 @@ const formData = ref({
 
 const fetchDepartments = async () => {
   try {
-    const response = await axios.get('http://localhost:8082/departments')
+    const response = await apiClient.get('/departments')
     departmentList.value = response.data
   } catch (error) {
     console.error("Axios Error:", error.message)
@@ -28,7 +28,7 @@ const fetchDepartments = async () => {
 
 const handleSubmit = async () => {
   try {
-    const response = await axios.post('http://localhost:8082/departments', formData.value)
+    const response = await apiClient.post('/departments', formData.value)
     console.log("Post Successful:", response)
   } catch (error) {
     console.error("Post Failed:", error.message)
@@ -105,7 +105,6 @@ generateNewProblem()
 }
 
 body {
-  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
