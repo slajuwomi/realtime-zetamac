@@ -1,0 +1,3 @@
+- store users number of correct answers and send to backend
+- do we need auth?
+- create lobby functionality
