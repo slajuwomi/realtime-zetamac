@@ -1,4 +1,4 @@
-package chat;
+package com.slajuwomi.realtime_zetamac.chat;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;

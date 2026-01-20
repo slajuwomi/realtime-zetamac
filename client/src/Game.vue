@@ -126,10 +126,5 @@ generateNewProblem()
 
 input {
   width: 180px;
-  font-size: 48px;
-}
-
-button {
-  font-size: 24px;
 }
 </style>

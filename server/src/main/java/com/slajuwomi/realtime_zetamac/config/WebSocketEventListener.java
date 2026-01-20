@@ -1,13 +1,12 @@
 package com.slajuwomi.realtime_zetamac.config;
 
-import chat.ChatMessage;
-import chat.MessageType;
+import com.slajuwomi.realtime_zetamac.chat.ChatMessage;
+import com.slajuwomi.realtime_zetamac.chat.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
-import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 

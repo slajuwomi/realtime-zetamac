@@ -7,6 +7,7 @@
     <RouterLink to="/">Go to Home</RouterLink>
     <RouterLink to="/chat">Go to Chat</RouterLink>
     <RouterLink to="/game">Go to Game</RouterLink>
+    <RouterLink to="/joinchat">Join Chat</RouterLink>
   </nav>
   <main>
     <RouterView/>
